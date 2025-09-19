@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Growth Blueprint | Gary Smith Ford</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutral & Professional Blue -->
+    <!-- Application Structure Plan: A top-down narrative SPA. It starts with a high-level "Dashboard" summarizing the core conflict (good sales, bad tech). Users can scroll or navigate to "The Audit" for a deep-dive into the problems with interactive charts. "The Blueprint" section follows, presenting the 3-phase solution with interactive tabs. Finally, "Projected Impact" visualizes the future success. This structure was chosen to guide the user through a clear story: The Problem, The Solution, the Result, making a complex audit digestible and persuasive. -->
+    <!-- Visualization & Content Choices: 
+        - Performance KPIs: Goal: Inform. Method: Styled HTML cards. Interaction: None. Justification: Quick, high-impact overview.
+        - Mobile Speed: Goal: Compare. Method: Bar Chart (Chart.js). Interaction: Tooltip on hover. Justification: Dramatically shows the disparity between the dealership and the industry average.
+        - Reputations: Goal: Compare. Method: Doughnut Chart acting as a Gauge (Chart.js). Interaction: Tooltip on hover. Justification: Visually represents ratings in a familiar gauge format using only canvas.
+        - Customer Churn: Goal: Inform. Method: Styled HTML Funnel. Interaction: None. Justification: Clearly visualizes the "leaky bucket" concept without complex JS, built with Tailwind.
+        - 3-Phase Plan: Goal: Organize. Method: HTML Tabs. Interaction: Click to switch content. Justification: Breaks a large table into manageable chunks, improving readability.
+        - Projections: Goal: Compare. Method: Styled HTML cards showing before/after. Interaction: None. Justification: Clearly highlights the value proposition and expected lift.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                min-height: 350px;
+            }
+        }
+
+        /* Added keyframe animations for a smoother user experience */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-[#FDFBF7] text-[#1a202c]">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex flex-col items-center justify-center w-full">
+                    <h1 class="text-xl font-bold text-[#0D47A1] sm:text-2xl">Turbocharged Digital Game Plan — Gary Smith Ford × Cyber Boat Pros</h1>
+                    <p class="mt-1 text-sm font-medium text-gray-500 sm:text-base">Fix the foundation. Launch with precision. Scale in overdrive.</p>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Dashboard Section: A quick overview with animated cards -->
+        <section id="dashboard" class="mb-20 text-center animate-fade-in" style="animation-delay: 0.1s;">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">A Tale of Two Stories</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Your dealership is experiencing incredible growth, but this success masks critical foundational flaws in your digital strategy that are actively hindering potential and wasting budget.</p>
+            
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 0.2s;">
+                    <h3 class="text-lg font-semibold text-gray-800">Sales Growth (MoM)</h3>
+                    <p class="text-4xl font-bold text-green-600 mt-2">▲ 61.6%</p>
+                    <p class="text-sm text-gray-500 mt-1">Excellent Momentum</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 0.3s;">
+                    <h3 class="text-lg font-semibold text-gray-800">Marketing ROI</h3>
+                    <p class="text-4xl font-bold text-green-600 mt-2">6:1</p>
+                    <p class="text-sm text-gray-500 mt-1">Healthy, but Unverified</p>
+                </div>
+                <div class="bg-red-50 p-6 rounded-xl shadow-lg border border-red-200 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 0.4s;">
+                    <h3 class="text-lg font-semibold text-red-800">Mobile Website Speed</h3>
+                    <p class="text-4xl font-bold text-red-600 mt-2">22.9s</p>
+                    <p class="text-sm text-red-500 mt-1">Critical Failure</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Audit Section: Deep dive into problems with charts and tables -->
+        <section id="audit" class="mb-20 animate-fade-in" style="animation-delay: 0.5s;">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">The Audit: A Cracked Foundation</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">A closer look under the hood reveals technical issues that are turning customers away, damaging your reputation, and making it impossible to track marketing effectiveness.</p>
+            </div>
+
+            <div class="mt-12 bg-white p-8 rounded-xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.6s;">
+                <h3 class="text-2xl font-bold text-center text-gray-800">1. Website & Technical Failures</h3>
+                <p class="text-center text-gray-600 mt-2">Your digital dealership's front door is nearly impossible to open on mobile.</p>
+                <div class="chart-container mt-8 h-80 md:h-96">
+                    <canvas id="speedChart"></canvas>
+                </div>
+                <div class="mt-8 flow-root">
+                    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                            <table class="min-w-full divide-y divide-gray-300">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Technology / Feature</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Impact</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">Facebook Ad Pixel</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">🔴 Missing</span></td>
+                                        <td class="px-3 py-4 text-sm text-gray-500">Cannot track ad ROI or retarget users on Facebook/Instagram.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">Google Ads Pixel</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">🔴 Missing</span></td>
+                                        <td class="px-3 py-4 text-sm text-gray-500">Cannot track ad ROI or optimize campaigns on Google.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">Website Chat Widget</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">🔴 Missing</span></td>
+                                        <td class="px-3 py-4 text-sm text-gray-500">Missed opportunities for instant customer engagement.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">SMS-Enabled Phone #</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">🔴 Missing</span></td>
+                                        <td class="px-3 py-4 text-sm text-gray-500">Fails to meet demand of 9/10 customers who prefer to text.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-white p-8 rounded-xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 0.7s;">
+                <h3 class="text-2xl font-bold text-center text-gray-800">2. Reputation & Retention Issues</h3>
+                <p class="text-center text-gray-600 mt-2">Your strong Facebook reputation is an untapped asset, while your Google presence is a liability. Meanwhile, the business is losing customers almost as fast as it gains them.</p>
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="text-center animate-fade-in" style="animation-delay: 0.8s;">
+                        <h4 class="font-semibold text-lg text-gray-700">A Tale of Two Reputations</h4>
+                        <div class="flex flex-col sm:flex-row justify-center items-center gap-8 mt-4">
+                            <div>
+                                <div class="chart-container h-48 w-48 mx-auto">
+                                    <canvas id="gmbChart"></canvas>
+                                </div>
+                                <p class="mt-2 font-semibold">Google My Business</p>
+                            </div>
+                            <div>
+                                <div class="chart-container h-48 w-48 mx-auto">
+                                    <canvas id="fbChart"></canvas>
+                                </div>
+                                <p class="mt-2 font-semibold">Facebook</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center animate-fade-in" style="animation-delay: 0.9s;">
+                        <h4 class="font-semibold text-lg text-gray-700">The Leaky Bucket (August 2025)</h4>
+                        <div class="mt-4 flex flex-col items-center justify-center h-full space-y-2">
+                            <div class="w-full max-w-xs bg-green-200 text-green-800 p-3 rounded-t-lg text-center font-bold shadow">
+                                +447 Newly Active Customers
+                            </div>
+                            <div class="w-11/12 max-w-[300px] bg-red-200 text-red-800 p-3 rounded-b-lg text-center font-bold shadow">
+                                -400 Newly Lost Customers
+                            </div>
+                            <div class="w-1/2 max-w-[150px] bg-blue-200 text-blue-800 p-2 text-center font-bold text-sm shadow">
+                                Net Gain: +47
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Blueprint Section: Tabbed 3-phase plan and integrated system diagram -->
+        <section id="blueprint" class="mb-20 animate-fade-in" style="animation-delay: 1.0s;">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">The Blueprint: Facebook Dealership Accelerator</h2>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Our proposed solution is an integrated, data-driven system designed to fix the foundation, leverage your hidden strengths, and automate growth.</p>
+            </div>
+            
+            <div class="mt-12 bg-white p-8 rounded-xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 1.1s;">
+                <h3 class="text-2xl font-bold text-center text-gray-800">An Integrated System</h3>
+                <div class="mt-6 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-center">
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <div class="bg-gray-100 p-2 rounded">Velocity</div>
+                        <div class="bg-gray-100 p-2 rounded">Apollo</div>
+                        <div class="bg-gray-100 p-2 rounded">Website</div>
+                        <div class="bg-gray-100 p-2 rounded">Phone</div>
+                        <div class="bg-gray-100 p-2 rounded">Google</div>
+                        <div class="bg-gray-100 p-2 rounded">Facebook</div>
+                    </div>
+                    <div class="text-4xl font-thin text-blue-500 transform rotate-90 md:rotate-0 transition-transform">→</div>
+                    <div class="bg-blue-600 text-white p-6 rounded-lg shadow-2xl">
+                        <h4 class="font-bold text-lg">Unified Hub</h4>
+                        <p>(CyberBoatPros CRM)</p>
+                    </div>
+                    <div class="text-4xl font-thin text-blue-500 transform rotate-90 md:rotate-0 transition-transform">→</div>
+                    <div class="space-y-2 text-left text-sm">
+                        <div class="bg-green-100 p-2 rounded">Capture & Nurture</div>
+                        <div class="bg-green-100 p-2 rounded">Book Appointment</div>
+                        <div class="bg-green-100 p-2 rounded">Report & Optimize</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-white p-8 rounded-xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 1.2s;">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Why Facebook?</h3>
+                        <p class="text-gray-600 mb-4">
+                            Facebook has more than <strong class="text-gray-900">100x</strong> the number of monthly active users than any other third-party website in your industry. This represents an enormous, untapped market for your dealership.
+                        </p>
+                        <ul class="space-y-2 text-gray-700">
+                            <li><strong class="text-gray-900">3.06 billion</strong> active users on Facebook a month.</li>
+                            <li>Over <strong class="text-gray-900">1.2 billion</strong> active users on Facebook Marketplace per month.</li>
+                        </ul>
+                    </div>
+                    <div class="relative flex justify-center items-center h-64 md:h-80">
+                        <div class="absolute w-36 h-36 sm:w-40 sm:h-40 border-2 border-blue-400 rounded-full flex flex-col justify-center items-center text-center left-0 sm:left-5 md:left-0">
+                             <span class="font-bold text-xl text-blue-600">29 M</span>
+                             <span class="text-sm text-gray-600">Autotrader</span>
+                        </div>
+                         <div class="absolute w-36 h-36 sm:w-40 sm:h-40 border-2 border-blue-400 rounded-full flex flex-col justify-center items-center text-center right-0 sm:right-5 md:right-0">
+                             <span class="font-bold text-xl text-blue-600">27 M</span>
+                             <span class="text-sm text-gray-600">Cars.com</span>
+                        </div>
+                        <div class="absolute w-48 h-48 sm:w-56 sm:h-56 border-4 border-[#0D47A1] rounded-full flex flex-col justify-center items-center text-center z-10 bg-white">
+                             <span class="font-bold text-3xl text-[#0D47A1]">3.06 B</span>
+                             <span class="text-lg text-gray-700">Facebook</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-white p-8 rounded-xl shadow-lg border border-gray-100 animate-fade-in" style="animation-delay: 1.3s;">
+                <h3 class="text-2xl font-bold text-center text-gray-800">3-Phase Execution Plan</h3>
+                <div class="mt-6 max-w-4xl mx-auto">
+                    <div class="border-b border-gray-200">
+                        <nav id="plan-tabs" class="-mb-px flex space-x-8" aria-label="Tabs">
+                            <button data-tab="phase1" class="tab-button border-blue-500 text-blue-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm">Phase 1: Pit Stop</button>
+                            <button data-tab="phase2" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">Phase 2: Launch</button>
+                            <button data-tab="phase3" class="tab-button border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">Phase 3: Overdrive</button>
+                        </nav>
+                    </div>
+                    <div class="mt-6">
+                        <div id="phase1" class="tab-content">
+                            <h4 class="font-bold text-lg text-gray-900">Phase 1: Pit Stop — Repair the Foundation (Months 1–2)</h4>
+                            <p class="text-sm text-gray-500">We pull into the pit lane to tune the engine before we race—fix the foundation so everything runs smooth and fast.</p>
+                            <ul class="mt-4 list-disc list-inside space-y-2 text-gray-700">
+                                <li>Fix and streamline the online service scheduler.</li>
+                                <li>Tighten tracking and site speed; ensure pixels and conversions fire correctly.</li>
+                                <li>Centralize all data, communication, & platforms into the CyberBoatPros CRM.</li>
+                                <li>Refresh your Facebook Business Page and stabilize your Google profile/reviews.</li>
+                            </ul>
+                        </div>
+                        <div id="phase2" class="tab-content hidden">
+                            <h4 class="font-bold text-lg text-gray-900">Phase 2: Launch — Hit the Gas (Months 3–4)</h4>
+                            <p class="text-sm text-gray-500">We roll out of the pit and punch it—launch campaigns that deliver quick wins and steady leads.</p>
+                            <ul class="mt-4 list-disc list-inside space-y-2 text-gray-700">
+                                <li>Launch Facebook & Instagram campaigns to increase sales leads and service bookings.</li>
+                                <li>Power campaigns with CyberBoatPros’ CRM AI; automatic follow-ups turn more leads into real appointments.</li>
+                                <li>Proactively generate new reviews to strengthen reputation and social proof.</li>
+                            </ul>
+                        </div>
+                        <div id="phase3" class="tab-content hidden">
+                            <h4 class="font-bold text-lg text-gray-900">Phase 3: Overdrive (Ongoing)</h4>
+                            <p class="text-sm text-gray-500">We stay in the fast lane with continuous testing, clear tracking, and expert guidance to keep growth compounding.</p>
+                            <ul class="mt-4 list-disc list-inside space-y-2 text-gray-700">
+                                <li>Scale and optimize Facebook ad campaigns to win competitors’ customers.</li>
+                                <li>Automate customer journeys in CyberBoatPros CRM to boost retention and repeat bookings.</li>
+                                <li>Maintain clear data reporting, testing, and ongoing optimizations to improve performance month after month.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projected Impact Section: Key metrics and before/after comparisons -->
+        <section id="impact" class="text-center animate-fade-in" style="animation-delay: 1.4s;">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Projected Business Impact</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">Executing this blueprint will transform key metrics across sales and service, leading to significant, trackable growth over the next 12 months.</p>
+            
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 1.5s;">
+                    <h3 class="text-lg font-semibold text-gray-800">Sales Gross Profit Lift</h3>
+                    <p class="text-xl font-bold text-gray-800 mt-2">Annual: <span class="text-green-600">$460K - $806K</span></p>
+                    <p class="text-sm font-semibold text-gray-500 mt-1">12-21 additional sales/mo</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 1.6s;">
+                    <h3 class="text-lg font-semibold text-gray-800">Service Gross Profit Lift</h3>
+                    <p class="text-xl font-bold text-gray-800 mt-2">Annual: <span class="text-green-600">$182K - $273K</span></p>
+                    <p class="text-sm font-semibold text-gray-500 mt-1">40-60 additional ROs/mo</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 1.7s;">
+                    <h3 class="text-lg font-semibold text-gray-800">Retained Gross Profit</h3>
+                    <p class="text-xl font-bold text-gray-800 mt-2">Annual: <span class="text-green-600">$228K - $342K</span></p>
+                    <p class="text-sm font-semibold text-gray-500 mt-1">40-60 retained customers/mo</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 1.8s;">
+                    <h3 class="text-lg font-semibold text-gray-800">Total Annual Lift</h3>
+                    <p class="text-3xl font-bold text-green-600 mt-2">$871K - $1.42M</p>
+                    <p class="text-sm text-gray-500 mt-1">Total projected gross profit</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 1.9s;">
+                    <h3 class="text-lg font-semibold text-gray-800">Lead Conversion</h3>
+                    <p class="text-3xl font-bold text-gray-800 mt-2">~2.8% &rarr; <span class="text-green-600">3.5%</span></p>
+                    <p class="text-lg font-semibold text-green-600 mt-1">▲ 15-25% Lift</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 2.0s;">
+                    <h3 class="text-lg font-semibold text-gray-800">Advertising ROI</h3>
+                    <p class="text-3xl font-bold text-gray-800 mt-2">6:1 &rarr; <span class="text-green-600">8:1</span></p>
+                    <p class="text-lg font-semibold text-green-600 mt-1">▲ 33% Lift (Verified)</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 2.1s;">
+                    <h3 class="text-lg font-semibold text-gray-800">GMB Rating</h3>
+                    <p class="text-3xl font-bold text-gray-800 mt-2">3.7 &rarr; <span class="text-green-600">4.2+</span></p>
+                    <p class="text-lg font-semibold text-green-600 mt-1">▲ 13% Lift</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 2.2s;">
+                    <h3 class="text-lg font-semibold text-gray-800">Monthly Service ROs</h3>
+                    <p class="text-3xl font-bold text-gray-800 mt-2">~1 &rarr; <span class="text-green-600">40-60</span></p>
+                    <p class="text-lg font-semibold text-green-600 mt-1">▲ 4,000%+ Lift</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow animate-fade-in" style="animation-delay: 2.3s;">
+                    <h3 class="text-lg font-semibold text-gray-800">Customer Churn</h3>
+                    <p class="text-3xl font-bold text-gray-800 mt-2">400 &rarr; <span class="text-green-600">~350</span></p>
+                    <p class="text-lg font-semibold text-green-600 mt-1">▼ 10-15% Reduction</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-white border-t border-gray-200 mt-20">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+            <p>Digital Growth Blueprint Prepared for Gary Smith Ford by Cyber Boat Pros</p>
+            <p>&copy; 2025 Cyber Boat Pros. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const speedData = {
+                labels: ['Gary Smith Ford', 'Industry Average'],
+                datasets: [{
+                    label: 'Mobile Load Speed (seconds)',
+                    data: [22.9, 0.2],
+                    backgroundColor: [
+                        'rgba(239, 68, 68, 0.6)',
+                        'rgba(34, 197, 94, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(239, 68, 68, 1)',
+                        'rgba(34, 197, 94, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            const speedConfig = {
+                type: 'bar',
+                data: speedData,
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Mobile Website Load Speed Comparison'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Load Time (seconds)'
+                            }
+                        }
+                    }
+                }
+            };
+
+            const speedChartCtx = document.getElementById('speedChart').getContext('2d');
+            new Chart(speedChartCtx, speedConfig);
+            
+            function createReputationChart(elementId, label, rating) {
+                const data = {
+                    labels: [label, ''],
+                    datasets: [{
+                        label: 'Rating',
+                        data: [rating, 5 - rating],
+                        backgroundColor: [rating > 4.0 ? 'rgba(34, 197, 94, 0.8)' : rating > 3.5 ? 'rgba(234, 179, 8, 0.8)' : 'rgba(239, 68, 68, 0.8)', 'rgba(229, 231, 235, 1)'],
+                        borderColor: ['#FFFFFF'],
+                        borderWidth: 2,
+                        circumference: 180,
+                        rotation: 270,
+                    }]
+                };
+                const config = {
+                    type: 'doughnut',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '60%',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false },
+                            title: {
+                                display: true,
+                                position: 'bottom',
+                                text: `${rating} ★`,
+                                font: { size: 20, weight: 'bold' },
+                                color: rating > 4.0 ? '#166534' : rating > 3.5 ? '#a16207' : '#991b1b',
+                                padding: { top: -40 }
+                            }
+                        }
+                    }
+                };
+                const ctx = document.getElementById(elementId).getContext('2d');
+                new Chart(ctx, config);
+            }
+
+            createReputationChart('gmbChart', 'Google My Business', 3.7);
+            createReputationChart('fbChart', 'Facebook', 4.5);
+
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.getAttribute('data-tab');
+
+                    tabs.forEach(t => {
+                        t.classList.remove('border-blue-500', 'text-blue-600');
+                        t.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                    });
+
+                    tab.classList.add('border-blue-500', 'text-blue-600');
+                    tab.classList.remove('border-transparent', 'text-gray-500');
+
+                    contents.forEach(content => {
+                        if (content.id === target) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
